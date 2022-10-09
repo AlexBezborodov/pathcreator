@@ -1,0 +1,24 @@
+.paths-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+.list-wrapper {
+    margin: 1rem 0;
+    border: 1px solid rgb(201, 200, 200);
+    border-radius: 8px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+@media(max-width: 992px) {
+    .list-wrapper {
+        height: 300px;
+    }
+}
+
+@media(min-width: 993px) {
+    .list-wrapper {
+        height: 600px;
+    }
+}
