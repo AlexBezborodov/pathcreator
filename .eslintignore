@@ -1,0 +1,3 @@
+# eslint is configured for browser compat, not node
+webpack.config.js
+webpack.development.config.js
