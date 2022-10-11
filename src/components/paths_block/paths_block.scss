@@ -1,7 +1,6 @@
 .paths-wrapper {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
 }
 .list-wrapper {
     margin: 1rem 0;
@@ -10,7 +9,9 @@
     padding: 10px;
     overflow-y: auto;
 }
-
+.list-active {
+    background-color: #188fff47;
+}
 @media(max-width: 992px) {
     .list-wrapper {
         height: 300px;
@@ -19,6 +20,6 @@
 
 @media(min-width: 993px) {
     .list-wrapper {
-        height: 600px;
+        height: 588px;
     }
 }
