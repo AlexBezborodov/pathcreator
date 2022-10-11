@@ -1,21 +1,14 @@
 import React, { FC } from "react";
 
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-interface MapProps {
-  width: string;
-  height: string;
-  maxHeight: string;
-  coords: {
-    lat: number;
-    lng: number;
-  };
-}
+
+import { MapProps } from "../../interfaces";
 
 export const Map: FC<any> = ({
   width = "100%",
   height = "80vh",
   maxHeight = "420px",
-  coords = { lat: 49.445390, lng: 32.061158 },
+  coords = { lat: 49.44539, lng: 32.061158 },
 }: MapProps) => {
   const containerStyle = {
     width,

@@ -2,13 +2,26 @@ import React from "react";
 
 import { CloseOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
 import { Map } from "../map";
+import { observer } from "mobx-react-lite";
+import pathsStore from "../../store/paths";
+
 import "./path_details.scss";
-export const PathDetails = () => {
+
+export const PathDetails = observer(() => {
+  const { pathId } = useParams();
   const navigate = useNavigate();
+
   const onClose = () => navigate("/");
+
+  const onRemove = () => {
+    pathsStore.removePath(Number(pathId));
+    onClose();
+  };
+
+  const details = pathsStore.getDetailedPathInfo(Number(pathId));
+
   return (
     <div className="details">
       <Button
@@ -18,27 +31,21 @@ export const PathDetails = () => {
         onClick={onClose}
       />
       <div className="details-header">
-        <h2>PathTitle</h2>
-        <span>1.74km</span>
+        <h2>{ details?.title}</h2>
+        <span>{details?.result}km</span>
       </div>
       <div className="full-description">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          {details?.fullDescription}
         </p>
       </div>
       <Map />
       <div className="footer-actions">
-        <Button type="link">Add to fav</Button>
-        <Button type="link" danger>
+        <Button type="link" onClick={() => pathsStore.addToFavourites(Number(pathId))}>{details?.isFavourite ? "Remove from fav" : "Add to fav"}</Button>
+        <Button type="link" onClick={onRemove} danger>
           Remove
         </Button>
       </div>
     </div>
   );
-};
+});

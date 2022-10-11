@@ -1,35 +1,43 @@
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, { FC, useState } from "react";
 
 import { FundOutlined } from "@ant-design/icons";
 import { Modal, Input, Row, Col, Button } from "antd";
 
+import { AddPathProps, DataPath } from "../../interfaces";
 import { Map } from "../map";
+import { observer } from "mobx-react-lite";
+import pathsStore from "../../store/paths";
 
 const { TextArea } = Input;
 
-interface AddPathProps {
-  isModalOpen: boolean;
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-}
-interface NewPath {
-  title?: string;
-  shortDescription?: string;
-  fullDescription?: string;
-}
-
-export const AddPath: FC<any> = ({
+export const AddPath: FC<any> = observer(({
   isModalOpen,
   setIsModalOpen,
 }: AddPathProps) => {
-  const [data, setData] = useState<NewPath>({});
+  const [data, setData] = useState<DataPath | any>({});
   const onHandleChange = (event: any) => {
-    setData((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+    setData((prev: Object) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
     setData({});
   };
+
+  const onAddPath = () => {
+    const newPath = {
+      id: Math.floor(Math.random() * 10000) + 1,
+      ...data,
+      isFavourite: false,
+      result: 4.4,
+      coords: [
+        { lat: 49.44539, lng: 32.061158 },
+        { lat: 49.44539, lng: 32.061158 },
+      ],
+    }
+    pathsStore.addPath(newPath);
+    handleCancel();
+  }
 
   return (
     <>
@@ -69,10 +77,10 @@ export const AddPath: FC<any> = ({
             />
             <p style={{ textAlign: "center", margin: "1.5rem 0" }}>
               <FundOutlined style={{ fontSize: "20px", marginRight: "10px" }} />{" "}
-              Total length 1.19km
+              Total length 4.4km
             </p>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Button type="primary" size="large">
+              <Button type="primary" size="large" onClick={onAddPath} disabled={!data.title || !data.shortDescription || !data.fullDescription}>
                 Add path
               </Button>
             </div>
@@ -84,4 +92,4 @@ export const AddPath: FC<any> = ({
       </Modal>
     </>
   );
-};
+});

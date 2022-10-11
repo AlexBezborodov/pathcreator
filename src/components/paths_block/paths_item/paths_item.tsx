@@ -5,18 +5,17 @@ import { List, Avatar, Space } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { LOGO } from "../../../constants";
-import { Props } from "../paths_list";
+import { DataPath } from "../../../interfaces";
 
 import "../paths_block.scss";
 
 export const PathsItem = (
-  { id, title, subtitle, result, isFavourite }: Props,
+  { id, title, shortDescription, result, isFavourite }: DataPath,
   key: number,
 ) => {
   const navigate = useNavigate();
   const { pathId } = useParams();
-  const modifiedSubtitle =
-    subtitle.length > 100 ? `${subtitle.slice(0, 50)}...` : subtitle;
+  const modifiedSubtitle = `${shortDescription?.slice(0, 50)}...`;
 
   const onNavigate = () => {
     navigate(`/path/${id}`);

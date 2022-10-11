@@ -3,32 +3,18 @@ import React, { FC, useEffect, useState } from "react";
 import { mockData } from "../../constants";
 import { SearchBar } from "../search_bar";
 import { PathList } from "./paths_list/path_list";
+import pathsStore from "../../store/paths";
 
 import "./paths_block.scss";
+import { observer } from "mobx-react-lite";
 
-export const PathsBlock: FC = () => {
+export const PathsBlock: FC = observer(() => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredData, setFilteredData] = useState(mockData);
-
-  const filterData = () => {
-    if (searchQuery.length) {
-      const filteredArr = mockData.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
-      setFilteredData(filteredArr);
-    } else {
-      setFilteredData(mockData);
-    }
-  };
-
-  useEffect(() => {
-    filterData();
-  }, [searchQuery]);
 
   return (
     <div className="paths-wrapper">
       <SearchBar setSearchQuery={setSearchQuery} />
-      <PathList listData={filteredData} />
+      <PathList listData={pathsStore.searchData(searchQuery)} />
     </div>
   );
-};
+});

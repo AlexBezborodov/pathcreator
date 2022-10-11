@@ -2,17 +2,10 @@ import React, { FC } from "react";
 
 import { List } from "antd";
 
+import { DataPath } from "../../../interfaces";
 import { PathsItem } from "../paths_item";
 
 import "../paths_block.scss";
-
-export interface Props {
-  id: number;
-  title: string;
-  subtitle: string;
-  result: string;
-  isFavourite: Boolean;
-}
 
 export const PathList: FC<any> = ({ listData }) => {
   return (
@@ -20,7 +13,7 @@ export const PathList: FC<any> = ({ listData }) => {
       <List
         itemLayout="horizontal"
         dataSource={listData}
-        renderItem={(item: Props, index: number) => (
+        renderItem={(item: DataPath, index: number) => (
           <PathsItem key={index} {...item} />
         )}
       />
