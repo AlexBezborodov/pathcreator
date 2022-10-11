@@ -2,6 +2,7 @@ import React from "react";
 
 import { StarTwoTone, RightOutlined } from "@ant-design/icons";
 import { List, Avatar, Space } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { LOGO } from "../../../constants";
 import { Props } from "../paths_list";
@@ -9,13 +10,24 @@ import { Props } from "../paths_list";
 import "../paths_block.scss";
 
 export const PathsItem = (
-  { title, subtitle, result, isFavourite }: Props,
+  { id, title, subtitle, result, isFavourite }: Props,
   key: number,
 ) => {
+  const navigate = useNavigate();
+  const { pathId } = useParams();
   const modifiedSubtitle =
     subtitle.length > 100 ? `${subtitle.slice(0, 50)}...` : subtitle;
+
+  const onNavigate = () => {
+    navigate(`/path/${id}`);
+  };
+
   return (
-    <List.Item key={key}>
+    <List.Item
+      key={key}
+      onClick={onNavigate}
+      className={`${Number(pathId) === id ? "list-active" : ""}`}
+    >
       <List.Item.Meta
         avatar={<Avatar src={LOGO} />}
         title={

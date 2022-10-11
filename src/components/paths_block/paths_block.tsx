@@ -13,7 +13,7 @@ export const PathsBlock: FC = () => {
   const filterData = () => {
     if (searchQuery.length) {
       const filteredArr = mockData.filter((item) =>
-        item.title.includes(searchQuery),
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()),
       );
       setFilteredData(filteredArr);
     } else {
