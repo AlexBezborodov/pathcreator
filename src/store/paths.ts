@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-import { mockData } from "../constants/contants";
+import { mockData } from "../constants/constants";
 import { DataPath } from "../interfaces";
 
 class pathsBuilder {
