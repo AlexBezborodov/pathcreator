@@ -24,7 +24,17 @@ export interface MapProps {
   width: string;
   height: string;
   maxHeight: string;
-  coords: {
+  defaultCoords: {
+    lat: number;
+    lng: number;
+  };
+  markers: Array<Marker> | [];
+  updateMarker: (updatedMarker: Marker) => void;
+}
+
+export interface Marker {
+  id: number;
+  position: {
     lat: number;
     lng: number;
   };
