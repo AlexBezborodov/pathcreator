@@ -13,7 +13,7 @@ const { TextArea } = Input;
 export const AddPath: FC<any> = observer(
   ({ isModalOpen, setIsModalOpen }: AddPathProps) => {
     const [data, setData] = useState<DataPath | any>({});
-    const [markers, setMarkers] = useState<any>([]);
+    const [markers, setMarkers] = useState<Marker | any>([]);
     const onHandleChange = (event: any) => {
       setData((prev: Object) => ({
         ...prev,
@@ -131,6 +131,7 @@ export const AddPath: FC<any> = observer(
                   maxHeight="520px"
                   markers={markers}
                   updateMarker={updateMarker}
+                  draggable={true}
                 />
               </div>
             </Col>

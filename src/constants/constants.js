@@ -14,7 +14,7 @@ export const mockData = [
     defaultCoords: { lat: 49.44539, lng: 32.061158 },
     markers: [
       { id: 222, position: { lat: 49.44539, lng: 32.061158 } },
-      { id: 444, position: { lat: 49.44538, lng: 32.061157 } },
+      { id: 444, position: { lat: 49.444489, lng: 32.06398 } },
     ],
   },
   {

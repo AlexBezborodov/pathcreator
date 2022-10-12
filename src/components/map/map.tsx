@@ -10,7 +10,8 @@ export const Map: FC<any> = ({
   maxHeight = "420px",
   defaultCoords = { lat: 49.44539, lng: 32.061158 },
   markers = [],
-  updateMarker,
+  updateMarker = () => {},
+  draggable = false,
 }: MapProps) => {
   const containerStyle = {
     width,
@@ -49,7 +50,7 @@ export const Map: FC<any> = ({
               <Marker
                 key={marker.id}
                 position={marker.position}
-                draggable={true}
+                draggable={draggable}
                 onDragEnd={(e) => getPosition(e, marker.id)}
               />
             ))}

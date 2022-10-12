@@ -12,12 +12,11 @@ export interface DataPath {
   fullDescription?: string;
   result?: number;
   isFavourite?: Boolean;
-  coords?: Array<Coords>;
-}
-
-interface Coords {
-  lat?: number;
-  lng?: number;
+  defaultCoords: {
+    lat: number;
+    lng: number;
+  };
+  markers: Array<Marker> | [];
 }
 
 export interface MapProps {
@@ -30,6 +29,7 @@ export interface MapProps {
   };
   markers: Array<Marker> | [];
   updateMarker: (updatedMarker: Marker) => void;
+  draggable: boolean;
 }
 
 export interface Marker {
