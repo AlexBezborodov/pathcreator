@@ -1,9 +1,12 @@
+/* global google */
+
 import React, { FC, useEffect, useState } from "react";
 
 import { FundOutlined } from "@ant-design/icons";
 import { Modal, Input, Row, Col, Button } from "antd";
 import { observer } from "mobx-react-lite";
 
+import { DEFAULT_COORDS } from "../../constants";
 import { AddPathProps, DataPath, Marker } from "../../interfaces";
 import pathsStore from "../../store/paths";
 import { Map } from "../map";
@@ -14,16 +17,18 @@ export const AddPath: FC<any> = observer(
   ({ isModalOpen, setIsModalOpen }: AddPathProps) => {
     const [data, setData] = useState<DataPath | any>({});
     const [markers, setMarkers] = useState<Marker | any>([]);
+
     const onHandleChange = (event: any) => {
       setData((prev: Object) => ({
         ...prev,
         [event.target.name]: event.target.value,
       }));
     };
+
     const addMarker = () => {
       const defaultMarker = {
         id: Math.floor(Math.random() * 10000) + 1,
-        position: { lat: 49.44539, lng: 32.061158 },
+        position: DEFAULT_COORDS,
       };
       setMarkers([...markers, defaultMarker]);
     };
@@ -45,6 +50,7 @@ export const AddPath: FC<any> = observer(
       pathsStore.addPath(newPath);
       handleCancel();
     };
+
     const calculateDistance = () => {
       if (markers.length === 2) {
         const start = new google.maps.LatLng(

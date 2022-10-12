@@ -1,3 +1,5 @@
+/* global google */
+
 import React, { FC, useEffect, useState } from "react";
 
 import {
@@ -7,25 +9,25 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 
-import { MapProps } from "../../interfaces";
+import { DEFAULT_COORDS } from "../../constants";
 
 export const Map: FC<any> = ({
   width = "100%",
   height = "80vh",
   maxHeight = "420px",
-  defaultCoords = { lat: 49.44539, lng: 32.061158 },
+  defaultCoords = DEFAULT_COORDS,
   markers = [],
   updateMarker = () => {},
   draggable = false,
-}: MapProps) => {
+}) => {
   const containerStyle = {
     width,
     height,
     maxHeight,
   };
-  const center = { lat: defaultCoords.lat, lng: defaultCoords.lng };
-
   const [route, setRoute] = useState<any>();
+
+  const center = { lat: defaultCoords.lat, lng: defaultCoords.lng };
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyBOekKhmcij4YvQjsagQcM7-1tt4VzJw5o",
@@ -41,24 +43,31 @@ export const Map: FC<any> = ({
   };
 
   const calculateRoute = async () => {
-    const start = new window.google.maps.LatLng(
-      markers[0].position.lat,
-      markers[0].position.lng,
-    );
+    const start = {
+      lat: markers[0].position.lat,
+      lng: markers[0].position.lng,
+    };
 
-    const end = new window.google.maps.LatLng(
-      markers[1].position.lat,
-      markers[1].position.lng,
-    );
+    const end = {
+      lat: markers[1].position.lat,
+      lng: markers[1].position.lng,
+    };
 
-    const directionsService = new window.google.maps.DirectionsService();
-    const results = await directionsService.route({
-      origin: start,
-      destination: end,
-      // eslint-disable-next-line no-undef
-      travelMode: google.maps.TravelMode.WALKING,
-    });
-    setRoute(results?.routes[0]?.legs[0]?.distance?.text);
+    const directionsService = new google.maps.DirectionsService();
+    const results = await directionsService.route(
+      {
+        origin: start,
+        destination: end,
+        travelMode: google.maps.TravelMode.WALKING,
+      },
+      (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          setRoute(results?.routes[0]?.legs[0]?.distance?.text);
+        } else {
+          console.error("ERROR", result);
+        }
+      },
+    );
   };
 
   useEffect(() => {
@@ -79,7 +88,7 @@ export const Map: FC<any> = ({
           }}
         >
           {markers.length &&
-            markers.map((marker) => (
+            markers.map((marker: any) => (
               <Marker
                 key={marker.id}
                 position={marker.position}

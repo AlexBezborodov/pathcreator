@@ -14,14 +14,14 @@ export const PathDetails = observer(() => {
   const { pathId } = useParams();
   const navigate = useNavigate();
 
+  const details = pathsStore.getDetailedPathInfo(Number(pathId));
+
   const onClose = () => navigate("/");
 
   const onRemove = () => {
     pathsStore.removePath(Number(pathId));
     onClose();
   };
-
-  const details = pathsStore.getDetailedPathInfo(Number(pathId));
 
   return (
     <div className="details">
