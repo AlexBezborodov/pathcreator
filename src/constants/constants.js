@@ -14,7 +14,7 @@ export const mockData = [
     defaultCoords: { lat: 49.44539, lng: 32.061158 },
     markers: [
       { id: 222, position: { lat: 49.44539, lng: 32.061158 } },
-      { id: 444, position: { lat: 49.444489, lng: 32.06398 } },
+      { id: 444, position: { lat: 49.444785, lng: 32.060095 } },
     ],
   },
   {
@@ -27,7 +27,7 @@ export const mockData = [
     defaultCoords: { lat: 49.44539, lng: 32.061158 },
     markers: [
       { id: 555, position: { lat: 49.44539, lng: 32.061158 } },
-      { id: 6666, position: { lat: 49.44538023, lng: 32.061157004 } },
+      { id: 6666, position: { lat: 49.445957, lng: 32.061576 } },
     ],
   },
   {
@@ -40,7 +40,7 @@ export const mockData = [
     defaultCoords: { lat: 49.44539, lng: 32.061158 },
     markers: [
       { id: 2222222, position: { lat: 49.44539, lng: 32.061158 } },
-      { id: 44444444, position: { lat: 49.445380034, lng: 32.0611570002234 } },
+      { id: 44444444, position: { lat: 49.444409, lng: 32.061147 } },
     ],
   },
   {
@@ -54,8 +54,8 @@ export const mockData = [
     isFavourite: true,
     defaultCoords: { lat: 49.44539, lng: 32.061158 },
     markers: [
-      { id: 222, position: { lat: 49.44539, lng: 32.061158 } },
-      { id: 444, position: { lat: 49.44538, lng: 32.061157 } },
+      { id: 2223333, position: { lat: 49.44539, lng: 32.061158 } },
+      { id: 4445555, position: { lat: 49.44556, lng: 32.060084 } },
     ],
   },
 ];
