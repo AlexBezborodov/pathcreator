@@ -103,7 +103,7 @@ export const AddPath: FC<any> = observer(
               <div style={{ margin: "24px 0" }} />
               <TextArea
                 showCount
-                maxLength={100}
+                maxLength={160}
                 placeholder="Short description"
                 autoSize={{ minRows: 5, maxRows: 5 }}
                 name="shortDescription"
@@ -112,7 +112,7 @@ export const AddPath: FC<any> = observer(
               />
               <div style={{ margin: "24px 0" }} />
               <TextArea
-                placeholder="Controlled autosize"
+                placeholder="Full description"
                 autoSize={{ minRows: 7, maxRows: 7 }}
                 name="fullDescription"
                 value={data?.fullDescription || ""}
